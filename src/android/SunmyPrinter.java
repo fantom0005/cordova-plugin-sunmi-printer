@@ -99,6 +99,7 @@ public class SunmyPrinter extends CordovaPlugin {
                 this.test();
                 callbackContext.success(message);
             } catch (Exception e) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 PrintStream ps = new PrintStream(baos);
                 e.printStackTrace(ps);
                 ps.close();
