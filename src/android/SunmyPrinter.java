@@ -6,29 +6,24 @@ import org.apache.cordova.CallbackContext;
 import ru.fantom.sunmi.sunmyprinter.ICallback;
 import ru.fantom.sunmi.sunmyprinter.IWoyouService;
 
-import java.util.Random;
+import ru.fantom.sunmi.sunmyprinter.ESCUtil;
 
-import java.io.*;
+// import java.util.Random;
+
+// import java.io.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.RemoteException;
-import android.util.Log;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Set;
+import java.util.UUID;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 
 
 /**
@@ -36,52 +31,86 @@ import android.util.Log;
  */
 public class SunmyPrinter extends CordovaPlugin {
 
-    private static final String TAG = "PrinterTestDemo";
+    // private static final String TAG = "PrinterTestDemo";
 	
-	public static final int DO_PRINT = 0x10001;
+	// public static final int DO_PRINT = 0x10001;
 	
-	private IWoyouService woyouService;
-	private byte[] inputCommand ;
+	// private IWoyouService woyouService;
+	// private byte[] inputCommand ;
     
-	private final int RUNNABLE_LENGHT = 11;
+	// private final int RUNNABLE_LENGHT = 11;
 	
-	private Random random = new Random();
+	// private Random random = new Random();
 	
-	private ICallback callback = null;
+	// private ICallback callback = null;
 	
-	private ServiceConnection connService = new ServiceConnection() {
+	// private ServiceConnection connService = new ServiceConnection() {
 
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
+	// 	@Override
+	// 	public void onServiceDisconnected(ComponentName name) {
 
-			woyouService = null;
-		}
+	// 		woyouService = null;
+	// 	}
 
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			woyouService = IWoyouService.Stub.asInterface(service);
-		}
-	};
+	// 	@Override
+	// 	public void onServiceConnected(ComponentName name, IBinder service) {
+	// 		woyouService = IWoyouService.Stub.asInterface(service);
+	// 	}
+	// };
 
-	private final int MSG_TEST = 1;
-	private long printCount = 0;
+	// private final int MSG_TEST = 1;
+	// private long printCount = 0;
 	
-	private void test(){
-		ThreadPoolManager.getInstance().executeTask(new Runnable(){
+	// private void test(){
+	// 	ThreadPoolManager.getInstance().executeTask(new Runnable(){
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				try {
-					woyouService.printerSelfChecking(null);
-					woyouService.printText(" printed: " + printCount + " bills.\n\n\n\n", null);
-					printCount++;
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}});
+	// 		@Override
+	// 		public void run() {
+	// 			// TODO Auto-generated method stub
+	// 			try {
+	// 				woyouService.printerSelfChecking(null);
+	// 				woyouService.printText(" printed: " + printCount + " bills.\n\n\n\n", null);
+	// 				printCount++;
+	// 			} catch (RemoteException e) {
+	// 				// TODO Auto-generated catch block
+	// 				e.printStackTrace();
+	// 			}
+	// 		}});
+	// }
+
+    
+	private static final UUID PRINTER_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
+	private static final String Innerprinter_Address = "00:11:22:33:44:55";
+
+	public static BluetoothAdapter getBTAdapter() {
+		return BluetoothAdapter.getDefaultAdapter();
 	}
+
+	public static BluetoothDevice getDevice(BluetoothAdapter bluetoothAdapter) {
+		BluetoothDevice innerprinter_device = null;
+		Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
+		for (BluetoothDevice device : devices) {
+			if (device.getAddress().equals(Innerprinter_Address)) {
+				innerprinter_device = device;
+				break;
+			}
+		}
+		return innerprinter_device;
+	}
+
+	public static BluetoothSocket getSocket(BluetoothDevice device) throws IOException {
+		BluetoothSocket socket = device.createRfcommSocketToServiceRecord(PRINTER_UUID);
+		socket.connect();
+		return socket;
+	}
+
+	public static void sendData(byte[] bytes, BluetoothSocket socket) throws IOException {
+		OutputStream out = socket.getOutputStream();
+		out.write(bytes, 0, bytes.length);
+		out.close();
+	}
+
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -95,18 +124,28 @@ public class SunmyPrinter extends CordovaPlugin {
 
     private void coolMethod(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
-             try {
-                this.test();
+            //  try {
+                // this.test();
                 callbackContext.success(message);
-            } catch (Exception e) {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                PrintStream ps = new PrintStream(baos);
-                e.printStackTrace(ps);
-                ps.close();
-                callbackContext.error(baos.toString());                
+                this.test();
+            // } catch (Exception e) {
+            //     ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            //     PrintStream ps = new PrintStream(baos);
+            //     e.printStackTrace(ps);
+            //     ps.close();
+            //     callbackContext.error(baos.toString());                
             }
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
     }    
+
+    private void test(){
+        BluetoothAdapter adapter = this.getBTAdapter();
+        BluetoothDevice device = this.getDevice(adapter);
+        BluetoothSocket socket = this.getSocket(device);
+        byte[] data = ESCUtil.generateMockData();
+        this.sendData(data,socket);
+    }
+
 }
