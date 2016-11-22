@@ -96,7 +96,7 @@ public class SunmyPrinter extends CordovaPlugin {
              try {
                 this.test();
                 callbackContext.success(message);
-            } catch (String s) {
+            } catch (Exception s) {
                 callbackContext.error(s);                
             }
         } else {
