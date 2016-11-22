@@ -136,11 +136,13 @@ public class SunmyPrinter extends CordovaPlugin {
     }    
 
     private void test(){
-        BluetoothAdapter adapter = this.getBTAdapter();
-        BluetoothDevice device = this.getDevice(adapter);
-        BluetoothSocket socket = this.getSocket(device);
-        byte[] data = ESCUtil.generateMockData();
-        this.sendData(data,socket);
+        try{
+            BluetoothAdapter adapter = this.getBTAdapter();
+            BluetoothDevice device = this.getDevice(adapter);
+            BluetoothSocket socket = this.getSocket(device);
+            byte[] data = ESCUtil.generateMockData();
+            this.sendData(data,socket);
+        }catch(IOException e){ }
     }
 
 }
