@@ -58,29 +58,11 @@ public class SunmyPrinter extends CordovaPlugin {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			woyouService = IWoyouService.Stub.asInterface(service);
-			setButtonEnable(true);
 		}
 	};
 
 	private final int MSG_TEST = 1;
 	private long printCount = 0;
-	
-	@SuppressLint("HandlerLeak")
-	Handler handler=new Handler(){
-	    @Override
-	    public void handleMessage(Message msg){
-	    	if(msg.what == MSG_TEST){
-	    		testAll();
-	    		long mm = MemInfo.getmem_UNUSED(PrinterTestDemoAct.this);
-	    		if( mm < 100){
-	    			handler.sendEmptyMessageDelayed(MSG_TEST, 20000);
-	    		}else{
-	    			handler.sendEmptyMessageDelayed(MSG_TEST, 800);
-	    		}
-	    		Log.i(TAG,"testAll: " + printCount + " Memory: " + mm);
-	    	}
-	    }
-	};
 	
 	private void test(){
 		ThreadPoolManager.getInstance().executeTask(new Runnable(){
