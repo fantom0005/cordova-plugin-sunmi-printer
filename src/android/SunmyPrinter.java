@@ -100,23 +100,19 @@ public class SunmyPrinter extends CordovaPlugin {
 	}
 
 	public static BluetoothSocket getSocket(BluetoothDevice device) throws IOException {
-        try{
             BluetoothSocket socket = device.createRfcommSocketToServiceRecord(PRINTER_UUID);
-            socket.connect();
+            try{
+                socket.connect();
+            }catch(IOException e){}
             return socket;
-        }catch(IOException e){
-            return new BluetoothSocket();
-        }
 	}
 
 	public static void sendData(byte[] bytes, BluetoothSocket socket) throws IOException {
-        try{
             OutputStream out = socket.getOutputStream();
-            out.write(bytes, 0, bytes.length);
+            try{
+                out.write(bytes, 0, bytes.length);
+            }catch(IOException e){ }
             out.close();
-         }catch(IOException e){
-            return new OutputStream();
-        }
 	}
 
 
