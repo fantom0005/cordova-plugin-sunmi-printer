@@ -1,5 +1,5 @@
 var exec = require('cordova/exec');
 
 exports.coolMethod = function(arg0, success, error) {
-    exec(success, error, "cordova-plugin-sunmi-printer", "coolMethod", [arg0]);
+    exec(success, error, "SunmyPrinter", "coolMethod", [arg0]);
 };
