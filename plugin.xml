@@ -12,11 +12,6 @@
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
         <source-file src="src/android/SunmyPrinter.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        <source-file src="src/android/WoyouPrinter.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        <source-file src="src/android/ThreadPoolManager.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        <source-file src="src/android/ESCUtil.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        <source-file src="aidl/android/ICallback.aidl" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        <source-file src="aidl/android/IWoyouService.aidl" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        
+        <source-file src="src/android/ESCUtil.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />        
     </platform>
 </plugin>

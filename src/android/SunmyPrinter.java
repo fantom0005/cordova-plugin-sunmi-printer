@@ -3,14 +3,7 @@ package ru.fantom.sunmi.sunmyprinter;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
-import ru.fantom.sunmi.sunmyprinter.ICallback;
-import ru.fantom.sunmi.sunmyprinter.IWoyouService;
-
 import ru.fantom.sunmi.sunmyprinter.ESCUtil;
-
-// import java.util.Random;
-
-// import java.io.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,59 +18,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 
-
-/**
- * This class echoes a string called from JavaScript.
- */
 public class SunmyPrinter extends CordovaPlugin {
-
-    // private static final String TAG = "PrinterTestDemo";
-	
-	// public static final int DO_PRINT = 0x10001;
-	
-	// private IWoyouService woyouService;
-	// private byte[] inputCommand ;
-    
-	// private final int RUNNABLE_LENGHT = 11;
-	
-	// private Random random = new Random();
-	
-	// private ICallback callback = null;
-	
-	// private ServiceConnection connService = new ServiceConnection() {
-
-	// 	@Override
-	// 	public void onServiceDisconnected(ComponentName name) {
-
-	// 		woyouService = null;
-	// 	}
-
-	// 	@Override
-	// 	public void onServiceConnected(ComponentName name, IBinder service) {
-	// 		woyouService = IWoyouService.Stub.asInterface(service);
-	// 	}
-	// };
-
-	// private final int MSG_TEST = 1;
-	// private long printCount = 0;
-	
-	// private void test(){
-	// 	ThreadPoolManager.getInstance().executeTask(new Runnable(){
-
-	// 		@Override
-	// 		public void run() {
-	// 			// TODO Auto-generated method stub
-	// 			try {
-	// 				woyouService.printerSelfChecking(null);
-	// 				woyouService.printText(" printed: " + printCount + " bills.\n\n\n\n", null);
-	// 				printCount++;
-	// 			} catch (RemoteException e) {
-	// 				// TODO Auto-generated catch block
-	// 				e.printStackTrace();
-	// 			}
-	// 		}});
-	// }
-
     
 	private static final UUID PRINTER_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
@@ -129,7 +70,6 @@ public class SunmyPrinter extends CordovaPlugin {
     private void coolMethod(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
-            this.test();    
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
