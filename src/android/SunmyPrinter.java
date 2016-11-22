@@ -3,6 +3,9 @@ package ru.fantom.sunmi;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
+import woyou.aidlservice.jiuiv5.ICallback;
+import woyou.aidlservice.jiuiv5.IWoyouService;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
