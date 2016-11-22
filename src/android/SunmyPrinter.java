@@ -20,6 +20,10 @@ import android.os.RemoteException;
  */
 public class SunmyPrinter extends CordovaPlugin {
 
+
+    private static final SunmyPrinter printer = new SunmyPrinter();
+	private  IWoyouService woyouService = null;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("coolMethod")) {
@@ -33,15 +37,12 @@ public class SunmyPrinter extends CordovaPlugin {
     private void coolMethod(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
             this.initPrinter();
-            this.print(message)
+            this.print(message);
             callbackContext.success(message);
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
     }
-
-    private static final SunmyPrinter printer = new SunmyPrinter();
-	private  IWoyouService woyouService = null;
 	
 	private ServiceConnection connService = new ServiceConnection() {
 
