@@ -5,7 +5,7 @@
 
 package ru.fantom.sunmi;
 
-import woyou.aidlservice.jiuiv5.ICallback;
+import ru.fantom.sunmi.ICallback;
 import android.graphics.Bitmap;
 
 interface IWoyouService

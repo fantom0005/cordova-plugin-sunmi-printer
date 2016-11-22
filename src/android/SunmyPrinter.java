@@ -3,7 +3,6 @@ package ru.fantom.sunmi;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
-import  ru.fantom.sunmi.ICallback;
 import  ru.fantom.sunmi.IWoyouService;
 
 import org.json.JSONArray;
