@@ -3,9 +3,9 @@
 * AIDL Version: 1.1
 */
 
-package ru.fantom.sunmi;
+package ru.fantom.sunmi.sunmyprinter;
 
-import ru.fantom.sunmi.ICallback;
+import ru.fantom.sunmi.sunmyprinter.ICallback;
 import android.graphics.Bitmap;
 
 interface IWoyouService

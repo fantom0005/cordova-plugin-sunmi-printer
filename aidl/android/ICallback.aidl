@@ -1,4 +1,4 @@
-package ru.fantom.sunmi;
+package ru.fantom.sunmi.sunmyprinter;
 
 /**
  * printing server result callback

@@ -1,9 +1,9 @@
-package ru.fantom.sunmi;
+package ru.fantom.sunmi.sunmyprinter;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
-import  ru.fantom.sunmi.IWoyouService;
+import  ru.fantom.sunmi.sunmyprinter.IWoyouService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
