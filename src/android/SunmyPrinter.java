@@ -93,8 +93,12 @@ public class SunmyPrinter extends CordovaPlugin {
 
     private void coolMethod(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
-            this.test();
-            callbackContext.success(message);
+             try {
+                this.test();
+                callbackContext.success(message);
+            } catch (String s) {
+                callbackContext.error(s);                
+            }
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
