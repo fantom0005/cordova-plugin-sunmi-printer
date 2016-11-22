@@ -8,6 +8,8 @@ import ru.fantom.sunmi.sunmyprinter.IWoyouService;
 
 import java.util.Random;
 
+import java.io.*;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,7 +99,10 @@ public class SunmyPrinter extends CordovaPlugin {
                 this.test();
                 callbackContext.success(message);
             } catch (Exception s) {
-                callbackContext.error(s);                
+                PrintStream ps = new PrintStream(baos);
+                e.printStackTrace(ps);
+                ps.close();
+                callbackContext.error(baos.toString());                
             }
         } else {
             callbackContext.error("Expected one non-empty string argument.");
