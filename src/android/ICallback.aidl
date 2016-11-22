@@ -1,4 +1,4 @@
-package woyou.aidlservice.jiuiv5;
+package ru.fantom.sunmi;
 
 /**
  * printing server result callback
