@@ -105,7 +105,7 @@ public class SunmyPrinter extends CordovaPlugin {
             socket.connect();
             return socket;
         }catch(IOException e){
-            return null;
+            return new BluetoothSocket();
         }
 	}
 
@@ -115,7 +115,7 @@ public class SunmyPrinter extends CordovaPlugin {
             out.write(bytes, 0, bytes.length);
             out.close();
          }catch(IOException e){
-            return null;
+            return new OutputStream();
         }
 	}
 
