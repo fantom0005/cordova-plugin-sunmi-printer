@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="ru.fantom.sunmi" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-plugin-sunmi-printer</name>
+    <js-module name="cordova-plugin-sunmi-printer" src="www/cordova-plugin-sunmi-printer.js">
+        <clobbers target="cordova.plugins.cordova-plugin-sunmi-printer" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="cordova-plugin-sunmi-printer">
+                <param name="android-package" value="ru.fantom.sunmi.cordova-plugin-sunmi-printer" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <source-file src="src/android/cordova-plugin-sunmi-printer.java" target-dir="src/ru/fantom/sunmi/cordova-plugin-sunmi-printer" />
+    </platform>
+</plugin>
