@@ -5,16 +5,12 @@
         <clobbers target="cordova.plugins.cordova-plugin-sunmi-printer" />
     </js-module>
     <platform name="android">
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>   
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="SunmyPrinter">
                 <param name="android-package" value="ru.fantom.sunmi.SunmyPrinter" />
             </feature>
         </config-file>
         <source-file src="src/android/SunmyPrinter.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-permission android:name="android.permission.BLUETOOTH" />
-            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-        </config-file>    
     </platform>
 </plugin>
