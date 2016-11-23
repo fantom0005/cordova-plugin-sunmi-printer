@@ -11,7 +11,6 @@
             </feature>
         </config-file>
         <source-file src="src/android/SunmyPrinter.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
-        <source-file src="src/android/ESCUtil.java" target-dir="src/ru/fantom/sunmi/sunmyprinter" />
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.BLUETOOTH" />
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
