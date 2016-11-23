@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SunmyPrinter extends CordovaPlugin {
-    
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("coolMethod")) {
@@ -25,6 +25,8 @@ public class SunmyPrinter extends CordovaPlugin {
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
+
+        return "Hello!!";
     }    
 
 }
